@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Voornaam Achternaam — Portfolio</title>
+  <meta
+    name="description"
+    content="Portfolio van Voornaam Achternaam — Designer, Developer & Creative."
+  />
+
+  <style>
+    /* =========================
+       RESET & VARIABLES
+    ========================== */
+
+    :root {
+      --bg: #f5f4f0;
+      --surface: #ffffff;
+      --text: #111111;
+      --muted: #77746e;
+      --line: #dedcd5;
+      --accent: #c8ff00;
+      --dark: #151515;
+
+      --max-width: 1240px;
+      --radius: 22px;
+      --transition: 0.35s cubic-bezier(.2,.8,.2,1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================== */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 22px 0;
+      transition: var(--transition);
+    }
+
+    header.scrolled {
+      padding: 14px 0;
+      background: rgba(245, 244, 240, 0.86);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 34px;
+      list-style: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 1px;
+      background: var(--text);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--dark);
+      color: white;
+      padding: 11px 17px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .nav-contact:hover {
+      transform: translateY(-2px);
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 150px 0 90px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 550px;
+      height: 550px;
+      border-radius: 50%;
+      background: var(--accent);
+      filter: blur(100px);
+      opacity: .16;
+      top: 5%;
+      right: -180px;
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.5fr .5fr;
+      gap: 60px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #79b800;
+      border-radius: 50%;
+      box-shadow: 0 0 0 5px rgba(121,184,0,.12);
+    }
+
+    .hero h1 {
+      font-size: clamp(60px, 9vw, 138px);
+      line-height: .88;
+      letter-spacing: -.075em;
+      font-weight: 800;
+      max-width: 1000px;
+    }
+
+    .hero h1 span {
+      color: var(--muted);
+    }
+
+    .hero-description {
+      max-width: 410px;
+      margin-left: auto;
+      padding-bottom: 8px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .hero-actions {
+      margin-top: 45px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 22px;
+      border-radius: 100px;
+      background: var(--dark);
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,0,0,.12);
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .button.secondary:hover {
+      background: white;
+    }
+
+    .arrow {
+      transition: var(--transition);
+    }
+
+    .button:hover .arrow {
+      transform: translate(3px, -3px);
+    }
+
+    /* =========================
+       SECTION
+    ========================== */
+
+    section {
+      padding: 120px 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+      margin-bottom: 55px;
+    }
+
+    .section-number {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-size: clamp(40px, 5vw, 72px);
+      line-height: .95;
+      letter-spacing: -.055em;
+      font-weight: 750;
+    }
+
+    .section-description {
+      max-width: 360px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* =========================
+       ABOUT
+    ========================== */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+    }
+
+    .about-large {
+      font-size: clamp(25px, 3vw, 42px);
+      line-height: 1.15;
+      letter-spacing: -.035em;
+      max-width: 700px;
+    }
+
+    .about-large span {
+      color: var(--muted);
+    }
+
+    .about-side {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 420px;
+      align-self: end;
+    }
+
+    .about-side p + p {
+      margin-top: 20px;
+    }
+
+    /* =========================
+       PROJECTS
+    ========================== */
+
+    .projects {
+      display: grid;
+      gap: 80px;
+    }
+
+    .project {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 38px;
+      align-items: center;
+    }
+
+    .project:nth-child(even) {
+      direction: rtl;
+    }
+
+    .project:nth-child(even) > * {
+      direction: ltr;
+    }
+
+    .project-image {
+      aspect-ratio: 1.35 / 1;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #deddd8;
+      position: relative;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .8s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .project:hover .project-image img {
+      transform: scale(1.05);
+    }
+
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      background: rgba(0,0,0,.18);
+      transition: var(--transition);
+    }
+
+    .project:hover .project-overlay {
+      opacity: 1;
+    }
+
+    .view-project {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      font-size: 22px;
+      transform: translateY(15px);
+      transition: var(--transition);
+    }
+
+    .project:hover .view-project {
+      transform: translateY(0);
+    }
+
+    .project-info {
+      padding: 20px;
+    }
+
+    .project-number {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 28px;
+    }
+
+    .project-title {
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: .98;
+      letter-spacing: -.055em;
+      margin-bottom: 18px;
+    }
+
+    .project-description {
+      color: var(--muted);
+      max-width: 420px;
+      font-size: 15px;
+      margin-bottom: 28px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      padding: 7px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    /* =========================
+       EXPERIENCE
+    ========================== */
+
+    .experience-list {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .experience {
+      display: grid;
+      grid-template-columns: 1fr 2fr auto;
+      gap: 30px;
+      padding: 28px 0;
+      border-top: 1px solid var(--line);
+      align-items: start;
+    }
+
+    .experience-date {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .experience-role {
+      font-size: 20px;
+      font-weight: 650;
+      letter-spacing: -.025em;
+    }
+
+    .experience-company {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 5px;
+    }
+
+    .experience-type {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .skill {
+      background: var(--bg);
+      padding: 35px;
+      min-height: 180px;
+    }
+
+    .skill-number {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 35px;
+    }
+
+    .skill h3 {
+      font-size: 22px;
+      letter-spacing: -.03em;
+      margin-bottom: 10px;
+    }
+
+    .skill p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .contact {
+      background: var(--dark);
+      color: white;
+      border-radius: 30px;
+      padding: 90px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact::after {
+      content: "";
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: var(--accent);
+      filter: blur(80px);
+      opacity: .12;
+      right: -120px;
+      bottom: -150px;
+    }
+
+    .contact-label {
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+
+    .contact h2 {
+      font-size: clamp(45px, 7vw, 100px);
+      line-height: .9;
+      letter-spacing: -.07em;
+      max-width: 850px;
+      margin-bottom: 50px;
+    }
+
+    .contact h2 span {
+      color: #777;
+    }
+
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 18px;
+      border-bottom: 1px solid #555;
+      padding-bottom: 8px;
+      transition: var(--transition);
+    }
+
+    .contact-email:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+
+    footer {
+      padding: 30px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .socials {
+      display: flex;
+      gap: 22px;
+    }
+
+    .socials a:hover {
+      color: var(--text);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: reveal .9s forwards;
+    }
+
+    .delay-1 {
+      animation-delay: .15s;
+    }
+
+    .delay-2 {
+      animation-delay: .3s;
+    }
+
+    .delay-3 {
+      animation-delay: .45s;
+    }
+
+    @keyframes reveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    @media (max-width: 800px) {
+
+      .container {
+        width: min(var(--max-width), calc(100% - 32px));
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 130px;
+      }
+
+      .hero-grid,
+      .about-grid,
+      .project {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .hero-description {
+        margin-left: 0;
+      }
+
+      .project:nth-child(even) {
+        direction: ltr;
+      }
+
+      .project-info {
+        padding: 0;
+      }
+
+      .experience {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .experience-type {
+        margin-top: 10px;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact {
+        padding: 55px 30px;
+        border-radius: 22px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 18px;
+        align-items: flex-start;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      .section-header {
+        display: block;
+      }
+
+      .section-description {
+        margin-top: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <header id="header">
+    <div class="container">
+      <nav>
+        <a href="#" class="logo">Portfolio</a>
+
+        <ul class="nav-links">
+          <li><a href="#over-mij">Over mij</a></li>
+          <li><a href="#ervaring">Ervaring</a></li>
+          <li><a href="#vaardigheden">Vaardigheden</a></li>
+        </ul>
+          <span></span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+
+  <main>
+
+    <section class="hero">
+      <div class="container">
+
+        <div class="hero-grid">
+
+          <div>
+
+            <h1 class="reveal delay-1">
+              Matthias<br>
+              <span>B.</span>
+            </h1>
+
+
+          <div class="hero-description reveal delay-3">
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="over-mij">
+      <div class="container">
+
+        <div class="section-header">
+          <div class="section-number">01 — Over mij</div>
+
+          <div class="section-description">
+            Een korte introductie en waar ik voor sta.
+          </div>
+        </div>
+
+        <div class="about-grid">
+
+          <div class="about-large">
+            Ik heb een hoge interesse in IT en gamen
+            <span>voor all in windows,cyber security en HTML,CSS.</span>
+          </div>
+
+          <div class="about-side">
+            <p>
+              Ik leer graag dingen over IT
+            </p>
+
+            <p>
+              Buiten mijn werk ben ik vaak bezig met nieuwe programma's, coderen,
+              gamen.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+<section id="ervaring">
+  <div class="container">
+
+
+<div class="section-header">
+  <div class="section-number">03 — Opleidingen</div>
+
+  <div class="section-description">
+    Mijn opleidingsachtergrond.
+  </div>
+</div>
+
+<div class="experience-list">
+
+  <!-- Hasp-O: 2021–2022 -->
+
+  <div class="experience">
+    <div class="experience-date">
+      2021 — 2022
+    </div>
+
+    <div>
+      <div class="experience-role">
+        Specialisatiejaar Computergestuurde Werktuigmachines
+      </div>
+
+      <div class="experience-company">
+        Hasp-O Centrum - Technicum, Sint-Truiden
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Hasp-O: 2018–2021 -->
+
+  <div class="experience">
+    <div class="experience-date">
+      2018 — 2021
+    </div>
+
+    <div>
+      <div class="experience-role">
+        Mechanische Vormgevingstechnieken
+      </div>
+
+      <div class="experience-company">
+        Hasp-O Centrum - Technicum, Sint-Truiden
+      </div>
+    </div>
+  </div>
+
+  <div class="experience">
+    <div class="experience-date">
+      Niet behaalde diploma's
+    </div>
+
+    <div>
+      <div class="experience-role">
+        
+      </div>
+
+      <div class="experience-company">
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- PXL: 2024–2026 -->
+
+  <div class="experience">
+    <div class="experience-date">
+      2024 — 2026
+    </div>
+
+    <div>
+      <div class="experience-role">
+        Graduaat Systeem- en Netwerkbeheer
+      </div>
+
+      <div class="experience-company">
+        PXL — Hasselt
+      </div>
+    </div>
+  </div>
+
+
+  <!-- PXL: 2023–2024 -->
+
+  <div class="experience">
+    <div class="experience-date">
+      2023 — 2024
+    </div>
+
+    <div>
+      <div class="experience-role">
+        Graduaat Digitale Vormgeving
+      </div>
+
+      <div class="experience-company">
+        PXL — Hasselt
+      </div>
+    </div>
+  </div>
+
+
+  <!-- PXL: 2022–2023 -->
+
+  <div class="experience">
+    <div class="experience-date">
+      2022 — 2023
+    </div>
+
+    <div>
+      <div class="experience-role">
+        Graduaat Programmeren
+      </div>
+
+      <div class="experience-company">
+        PXL — Hasselt
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+  </div>
+</section>
+
+
+    <section id="vaardigheden">
+      <div class="container">
+
+        <div class="section-header">
+          <div class="section-number">04 — Vaardigheden</div>
+
+          <div class="section-description">
+            Tools, disciplines en expertise.
+          </div>
+        </div>
+
+        <div class="skills-grid">
+
+          <div class="skill">
+            <div class="skill-number">01</div>
+            <h3>Design</h3>
+            <p>
+              UI/UX, visual design, branding, prototyping en design systems.
+            </p>
+          </div>
+
+          <div class="skill">
+            <div class="skill-number">02</div>
+            <h3>Development</h3>
+            <p>
+              HTML, CSS, JavaScript, responsive design en moderne
+              frontend-technieken.
+            </p>
+          </div>
+
+          <div class="skill">
+            <div class="skill-number">03</div>
+            <h3>Python</h3>
+            <p>
+              Coderen, game design.
+            </p>
+          </div>
+
+          <div class="skill">
+            <div class="skill-number">04</div>
+            <h3>Tools</h3>
+            <p>
+              Figma, Adobe Creative Cloud, Git,visual studio code en andere
+              digitale tools.
+            </p>
+          </div>
+
+          <div class="skill">
+            <div class="skill-number">05</div>
+            <h3>Communicatie</h3>
+            <p>
+              Presenteren, samenwerken.
+            </p>
+          </div>
+
+          <div class="skill">
+            <div class="skill-number">06</div>
+            <h3>Talen</h3>
+            <p>
+              Nederlands — moedertaal<br>
+              Engels — vloeiend<br>
+              Duits -basis
+            </p>
+          </div>
+
+          <div class="skill">
+            <div class="skill-number">07</div>
+            <h3>Unity</h3>
+            <p>
+              Unity game development<br>
+            </p>
+          </div>
+          
+          <div class="skill">
+            <div class="skill-number">08</div>
+            <h3>CNC</h3>
+            <p>
+              Draaibanken en frezen<br>
+            </p>
+          </div>
+          <div class="skill">
+            <div class="skill-number">09</div>
+            <h3>Windows</h3>
+            <p>
+              Office,Entra,Intune,Powershell,Sharepoint,Microsoft 365<br>
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+
+        <div class="contact">
+
+          <div class="contact-label">
+            05 — Contact
+          </div>
+
+          <h2>
+            Laten we iets
+            <span>goeds maken.</span>
+          </h2>
+
+          <a
+            href="mailto:voornaam@email.nl"
+            class="contact-email"
+          >
+            voornaam@email.nl
+            <span>↗</span>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+  <footer>
+    <div class="container">
+
+      <div class="footer-inner">
+
+        <div>
+          © 2026 Voornaam Achternaam
+        </div>
+
+        <div class="socials">
+          <a href="#">LinkedIn</a>
+          <a href="#">GitHub</a>
+          <a href="#">Instagram</a>
+        </div>
+
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById("header");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 40) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+    });
+  </script>
+
+</body>
+</html>
